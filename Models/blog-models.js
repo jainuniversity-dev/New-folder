@@ -34,6 +34,7 @@ const blogsSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+
     createdAt:{
         type: Number,
         required: false,
