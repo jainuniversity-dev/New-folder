@@ -6,7 +6,7 @@ import {
   createBlogs,
   updateBlogs,
   deleteBlogs,
-} from "../Controllers/blog-controllers"; // Correct import
+} from "../Controllers/blog-controllers.js"; // Correct import
 
 // Define routes
 router.get("/blogs", getAllBlogs); // Get all blogs--

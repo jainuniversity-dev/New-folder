@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-const blogsSchema = new mongoose.Schema(
-  {
+const blogsSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true,
@@ -25,26 +24,22 @@ const blogsSchema = new mongoose.Schema(
     // },
 
     status: { type: Boolean, required: true }, // Ensure status is Boolean
-    createdAt: { type: Date, default: Date.now },
     slug: { type: String, unique: true, required: true },
     // slug: {
     //   type: String,
     //   required: true,
     //   unique: true,
     // },
-    seotitle: {
+    seoTitle: {
       type: String,
       required: true,
     },
-    // meta_keywords: {
-    //   type: [String],
-    //   required: true,
-    // },
-  },
-  {
-    timestamps: true,
-  }
-);
+    createdAt:{
+        type: Number,
+        required: false,
+        default: Math.floor(Date.now() / 1000),
+    }
+  });
 
 const Blogs = mongoose.model("Blogs", blogsSchema, "blogs");
 

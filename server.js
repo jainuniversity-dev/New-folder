@@ -1,21 +1,17 @@
 import express from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
-import connectDb from "./utils/db.js";
+
 import router from "./routes/auth-route.js";
 import blogsRouter from "./routes/blog-route.js";
+import {connectDB} from "./Utils/database.js";
 
 
 const app = express();
-const PORT = 5000;
+const PORT = 3000;
 
-const corsOptions = {
-  origin: ["http://localhost:3000"],
-  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 // Default route
@@ -23,13 +19,9 @@ app.get("/", (req, res) => {
   res.send("Hello, Backend!");
 });
 
-// API welcome route
-app.get("/api", (req, res) => {
-  res.json({ message: "Welcome to API" });
-});
-
 // API routes
 app.use("/api/auth", router);
+
 app.use("/api", blogsRouter);
 
 
@@ -52,8 +44,8 @@ app.post("/login", (req, res) => {
 });
 
 // Connect to database and start server
-connectDb().then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT, async () => {
+   await connectDB()
     console.log(`Server running on http://localhost:${PORT}`);
   });
-});
+
